@@ -1,6 +1,6 @@
 # ci4-adminkit-adminlte4
 
-Tema **AdminLTE 4** (Bootstrap 5) per [`vaccardo/ci4-adminkit`](../ci4-adminkit). Fornisce ciò che il kit di infrastruttura non impone: il **layout grafico** del pannello e delle pagine di autenticazione.
+Tema **AdminLTE 4** (Bootstrap 5) per [`enzoaccardo/ci4-adminkit`](../ci4-adminkit). Fornisce ciò che il kit di infrastruttura non impone: il **layout grafico** del pannello e delle pagine di autenticazione.
 
 - **Layout pannello admin**: `layout/main.tpl` + `header` / `sidebar` / `footer`, toast container e modal di conferma. Menu ad albero via `nav_menu` (dal kit), branding da config.
 - **Pagine front auth** stilizzate: login, recupero/reset password, MFA (verify / setup / recover / recovery-codes).
@@ -18,7 +18,7 @@ Restano all'app: autenticazione/RBAC, menu (dati), migrazioni, rotte.
 ]
 ```
 ```bash
-composer require vaccardo/ci4-adminkit-adminlte4:@dev
+composer require enzoaccardo/ci4-adminkit-adminlte4:@dev
 php spark adminkit:publish       # asset del kit (widget/vendor)
 php spark adminlte4:publish       # asset del tema (AdminLTE/Bootstrap)
 php spark adminlte4:publish --config   # opzionale: config branding

@@ -1,13 +1,19 @@
 {
-    "name": "vaccardo/ci4-adminkit-adminlte4",
+    "name": "enzoaccardo/ci4-adminkit-adminlte4",
     "description": "Tema AdminLTE 4 (Bootstrap 5) per ci4-adminkit: layout pannello admin + pagine front auth, asset precompilati + sorgenti Vite.",
     "type": "library",
     "license": "MIT",
+    "authors": [
+        {
+            "name": "Vincenzo Accardo",
+            "email": "vincenzo.accardo@w3style.it"
+        }
+    ],
     "require": {
         "php": "^8.2",
         "codeigniter4/framework": "^4.7",
         "smarty/smarty": "^5.8",
-        "vaccardo/ci4-adminkit": "@dev"
+        "enzoaccardo/ci4-adminkit": "@dev"
     },
     "autoload": {
         "psr-4": {
