@@ -1,0 +1,21 @@
+{
+    "name": "ci4-adminkit-adminlte4",
+    "version": "0.1.0",
+    "description": "Sorgenti Vite del tema AdminLTE 4 per ci4-adminkit. Opzionale: gli asset compilati sono già in assets/dist/.",
+    "private": true,
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build"
+    },
+    "dependencies": {
+        "@popperjs/core": "^2.11.8",
+        "admin-lte": "4.0.0-beta3",
+        "bootstrap": "^5.3.8"
+    },
+    "devDependencies": {
+        "autoprefixer": "^10.4.0",
+        "postcss": "^8.4.0",
+        "sass": "^1.70.0",
+        "vite": "^5.0.0"
+    }
+}
