@@ -1,52 +1,42 @@
 # ci4-adminkit-adminlte4
 
-Tema **AdminLTE 4** (Bootstrap 5) per [`enzoaccardo/ci4-adminkit`](../ci4-adminkit). Fornisce ciò che il kit di infrastruttura non impone: il **layout grafico** del pannello e delle pagine di autenticazione.
+La pelle grafica per ci4-adminkit.
 
-- **Layout pannello admin**: `layout/main.tpl` + `header` / `sidebar` / `footer`, toast container e modal di conferma. Menu ad albero via `nav_menu` (dal kit), branding da config.
-- **Pagine front auth** stilizzate: login, recupero/reset password, MFA (verify / setup / recover / recovery-codes).
-- **Asset**: `app.css` / `app.js` (AdminLTE 4 + Bootstrap 5) **già compilati** in `assets/dist/` + `confirm-toast.js`. Comando `spark adminlte4:publish` per copiarli in `public/`. Nessun Node richiesto sul consumer; le sorgenti Vite (`resources/`) ci sono per chi vuole ricompilare.
-- **Controller base**: `ThemedAdminController` (pannello) e `ThemedFrontController` (auth) — estendono/affiancano il kit e agganciano le viste del tema alla catena Smarty.
+Il kit lascia il markup senza stile (classi di Bootstrap ma nessun CSS). Questo
+pacchetto ci mette sopra AdminLTE 4 con Bootstrap 5, i layout del pannello e le
+pagine dell'area di login già impaginate.
 
-Restano all'app: autenticazione/RBAC, menu (dati), migrazioni, rotte.
+## Cosa trovi dentro
 
-## Installazione (dev, path repository)
-```jsonc
-// composer.json dell'app — servono ENTRAMBI i pacchetti
-"repositories": [
-  { "type": "path", "url": "../ci4-adminkit" },
-  { "type": "path", "url": "../ci4-adminkit-adminlte4" }
-]
+* Il layout del pannello: header, sidebar con menu ad albero, footer, più i
+  contenitori per i toast e per la modale di conferma.
+* Le pagine non autenticate già pronte: login, recupero e reset della password,
+  e i vari passaggi dell'autenticazione a due fattori.
+* Gli asset già compilati (`app.css`, `app.js`) sotto `assets/dist`, così per
+  usarlo non ti serve Node. Se poi vuoi rimetterci mano ci sono i sorgenti Vite.
+
+Il collegamento con il kit passa da due controller base, `ThemedAdminController`
+e `ThemedFrontController`, che infilano le viste del tema nella catena di Smarty.
+Il tuo `AdminController` estende il primo e, dentro `prepareView()`, gli passa il
+menu, l'avatar e i titoli di pagina.
+
+## Installazione
+
 ```
-```bash
-composer require enzoaccardo/ci4-adminkit-adminlte4:@dev
-php spark adminkit:publish       # asset del kit (widget/vendor)
-php spark adminlte4:publish       # asset del tema (AdminLTE/Bootstrap)
-php spark adminlte4:publish --config   # opzionale: config branding
+composer require enzoaccardo/ci4-adminkit-adminlte4
+php spark adminkit:publish
+php spark adminlte4:publish
 ```
-(In alternativa al path repo: `type: vcs` con l'URL del repo git, oppure Packagist.)
 
-## Uso
-**Pannello** — il controller base dell'app estende `ThemedAdminController` e, sovrascrivendo `prepareView()` (con `parent::prepareView()`), aggiunge menu (`$menuTree`), avatar (`$userAvatarUrl`), titoli:
-```php
-class AdminController extends \AdminKit\AdminLTE\Controllers\ThemedAdminController
-{
-    protected function prepareView(): void
-    {
-        parent::prepareView();
-        $this->assign('menuTree', /* albero di oggetti {label,icon,path,children} */);
-        $this->assign('userAvatarUrl', /* ... */);
-    }
-}
-```
-Le viste di pagina fanno `{extends file='layout/main.tpl'}` e riempiono `{block name='content'}`.
+Aggiungi `--config` al secondo comando se vuoi copiarti in locale la config del
+branding. Il kit viene tirato dentro come dipendenza.
 
-**Auth** — i controller front estendono `ThemedFrontController` e renderizzano `login` / `mfa-verify` / ecc., assegnando `$success`/`$error`.
+## Branding e CSS
 
-## Branding
-`php spark adminlte4:publish --config` crea `app/Config/AdminLTE.php`: `brand`, `titleSuffix`, `footerText`, `logoUrl`, `useCdn` (font/icone/overlayscrollbars da CDN — metti a `false` per self-hosting).
+Nome, logo e testo del footer stanno in `Config\AdminLTE`. Se devi ricompilare
+il CSS del tema, dentro il pacchetto trovi `package.json` e `vite.config.js`:
+`npm install` e poi `npm run build`.
 
-## Ricompilare il tema (opzionale)
-```bash
-npm install
-npm run build   # rigenera assets/dist/ da resources/ (AdminLTE 4 + Bootstrap 5)
-```
+## Licenza
+
+MIT. Vedi [LICENSE](LICENSE).
