@@ -13,7 +13,7 @@
         "php": "^8.2",
         "codeigniter4/framework": "^4.7",
         "smarty/smarty": "^5.8",
-        "enzoaccardo/ci4-adminkit": "@dev"
+        "enzoaccardo/ci4-adminkit": "^0.1"
     },
     "autoload": {
         "psr-4": {
